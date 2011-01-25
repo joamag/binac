@@ -2,10 +2,10 @@ global loader                           ; making entry point visible to linker
 extern kmain                            ; kmain is defined elsewhere
 
                                         ; setting up the multiboot header, see grub docs for details
-MODULEALIGN equ  1 << 0                   ; align loaded modules on page boundaries
-MEMINFO     equ  1 << 1                   ; provide memory map
+MODULEALIGN equ  1 << 0                 ; align loaded modules on page boundaries
+MEMINFO     equ  1 << 1                 ; provide memory map
 FLAGS       equ  MODULEALIGN | MEMINFO  ; this is the Multiboot "flag" field
-MAGIC       equ  0x1badb002             ; 'magic number' lets bootloader find the header
+MAGIC       equ  0x1badb002             ; "magic number" lets bootloader find the header
 CHECKSUM    equ -(MAGIC + FLAGS)        ; checksum required
 
 section .text
