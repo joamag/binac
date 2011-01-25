@@ -19,8 +19,9 @@ void kmain(void* mbd, unsigned int magic) {
 }
 
  void keyboard_scan() {
-    byte new_scan_code = inportb(0x60);
- 
+    /* reads the new scan code */
+    char new_scan_code = inportb(0x60);
+
     /**
 	 * Do something with the scancode.
      * Remember you only get '''one''' byte of the scancode each time the ISR is invoked.
