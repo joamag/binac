@@ -9,7 +9,7 @@ void kmain(void* mbd, unsigned int magic) {
 
     /* You could either use multiboot.h */
     /* (http://www.gnu.org/software/grub/manual/multiboot/multiboot.html#multiboot_002eh) */
-    /* or do your offsets yourself. The following is merely an example. */ 
+    /* or do your offsets yourself. The following is merely an example. */
     char *boot_loader_name = (char*) ((long*) mbd)[16];
 
     /* writes the hello world string */
@@ -26,10 +26,10 @@ void write_string(int colour, const char *string) {
     while(*string != 0) {
         /* sets the video buffer value as the string value */
         *video = *string;
-        
+
         /* increments the string buffer */
         string++;
-        
+
         /* increments the video buffer */
         video++;
 
