@@ -18,6 +18,19 @@ void kmain(void* mbd, unsigned int magic) {
     /* Write your kernel here. */
 }
 
+ void keyboard_scan() {
+    byte new_scan_code = inportb(0x60);
+ 
+    /**
+	 * Do something with the scancode.
+     * Remember you only get '''one''' byte of the scancode each time the ISR is invoked.
+     * (Though most of the times the scancode is only one byte.) 
+     */
+ 
+    /* Acknowledge the IRQ, pretty much tells the PIC that we can accept >=priority IRQs now. */
+    outportb(0x20, 0x20);
+ }
+
 void write_string(int colour, const char *string) {
     /* starts the video buffer value */
     volatile char *video = (volatile char *) 0xB8000;
