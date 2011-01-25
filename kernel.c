@@ -23,11 +23,11 @@ void kmain(void* mbd, unsigned int magic) {
     char new_scan_code = inportb(0x60);
 
     /**
-	 * Do something with the scancode.
+     * Do something with the scancode.
      * Remember you only get '''one''' byte of the scancode each time the ISR is invoked.
-     * (Though most of the times the scancode is only one byte.) 
+     * (Though most of the times the scancode is only one byte.)
      */
- 
+
     /* Acknowledge the IRQ, pretty much tells the PIC that we can accept >=priority IRQs now. */
     outportb(0x20, 0x20);
  }
