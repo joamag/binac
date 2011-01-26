@@ -36,7 +36,7 @@ void kmain(void *mbd, u32int magic) {
 
 void write_string(s32int colour, const s8int *string) {
     /* starts the video buffer value */
-    volatile s8int *video = (volatiles8int *) 0xB8000;
+    volatile s8int *video = (volatile s8int *) 0xB8000;
 
     /* iterates while the end of string is not found */
     while(*string != 0) {
