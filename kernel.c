@@ -1,6 +1,8 @@
 #include "common.h"
 
 void write_string(s32int colour, const s8int *string);
+void move_cursor(u16int cursor_x, u16int cursor_y);
+void clear_screen();
 
 void kmain(void *mbd, u32int magic) {
     if (magic != 0x2badb002) {
@@ -57,7 +59,7 @@ void write_string(s32int colour, const s8int *string) {
     }
 }
 
-static void move_cursor(u16int cursor_x, u16int cursor_y) {
+void move_cursor(u16int cursor_x, u16int cursor_y) {
     /* calculates the cursor location */
     u16int cursorLocation = cursor_y * 80 + cursor_x;
 
@@ -67,7 +69,7 @@ static void move_cursor(u16int cursor_x, u16int cursor_y) {
     outb(0x3d5, cursorLocation);      // Send the low cursor byte.
 }
 
-void monitor_clear() {
+void clear_screen() {
     /* allocates the index */
 	u32int index;
 
