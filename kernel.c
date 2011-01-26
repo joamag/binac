@@ -16,6 +16,9 @@ void kmain(void *mbd, u32int magic) {
     /* or do your offsets yourself. The following is merely an example. */
     s8int *boot_loader_name = (char *) ((long *) mbd)[16];
 
+    /* clears the screen */
+    clear_screen();
+
     /* writes the hello world string */
     write_string(0x07, "hello world");
 
@@ -71,7 +74,7 @@ void move_cursor(u16int cursor_x, u16int cursor_y) {
 
 void clear_screen() {
     /* allocates the index */
-	u32int index;
+    u32int index;
 
     /* starts the video buffer value */
     volatile s8int *video = (volatile s8int *) 0xb8000;
@@ -80,7 +83,7 @@ void clear_screen() {
     u8int attributeByte = (0 << 4) | (15 & 0x0f);
     u16int blank = 0x20 | (attributeByte << 8);
 
-	/* iterates over all the chacter fields in the video buffer */
+    /* iterates over all the chacter fields in the video buffer */
     for(index = 0; index < 80 * 25; index++) {
         /* sets the blank value */
         video[index] = blank;
