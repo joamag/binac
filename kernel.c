@@ -22,7 +22,7 @@ void kmain(void *mbd, u32int magic) {
 
  void keyboard_scan() {
     /* reads the new scan code */
-    char new_scan_code = inportb(0x60);
+    char new_scan_code = inb(0x60);
 
     /**
      * Do something with the scancode.
@@ -30,8 +30,8 @@ void kmain(void *mbd, u32int magic) {
      * (Though most of the times the scancode is only one byte.)
      */
 
-    /* Acknowledge the IRQ, pretty much tells the PIC that we can accept >=priority IRQs now. */
-    outportb(0x20, 0x20);
+    /* acknowledge the IRQ, pretty much tells the PIC that we can accept >=priority IRQs now */
+    outb(0x20, 0x20);
  }
 
 void write_string(s32int colour, const s8int *string) {
