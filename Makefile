@@ -1,5 +1,5 @@
-all: loader.o kernel.o linker.ld
-	ld -T linker.ld -o kernel.bin loader.o kernel.o -melf_i386
+all: loader.o kernel.o common.o linker.ld
+	ld -T linker.ld -o kernel.bin loader.o kernel.o common.o -melf_i386
 
 loader.o: loader.asm
 	nasm -f elf -o loader.o loader.asm
