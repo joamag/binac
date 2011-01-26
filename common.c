@@ -1,6 +1,7 @@
 #include "common.h"
 
 void outb(u16int port, u8int value) {
+    /* calls the assembly code */
     asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
 }
 

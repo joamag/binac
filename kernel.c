@@ -14,7 +14,7 @@ void kmain(void *mbd, u32int magic) {
     /* You could either use multiboot.h */
     /* (http://www.gnu.org/software/grub/manual/multiboot/multiboot.html#multiboot_002eh) */
     /* or do your offsets yourself. The following is merely an example. */
-    s8int *boot_loader_name = (char *) ((long *) mbd)[16];
+    s8int *boot_loader_name = (s8int *) ((s32int *) mbd)[16];
 
     /* clears the screen */
     clear_screen();
@@ -27,7 +27,7 @@ void kmain(void *mbd, u32int magic) {
 
  void keyboard_scan() {
     /* reads the new scan code */
-    char new_scan_code = inb(0x60);
+    s8int new_scan_code = inb(0x60);
 
     /**
      * Do something with the scancode.
@@ -64,12 +64,19 @@ void write_string(s32int colour, const s8int *string) {
 
 void move_cursor(u16int cursor_x, u16int cursor_y) {
     /* calculates the cursor location */
-    u16int cursorLocation = cursor_y * 80 + cursor_x;
+    u16int cursor_location = cursor_y * 80 + cursor_x;
 
-    outb(0x3d4, 14);                  // Tell the VGA board we are setting the high cursor byte.
-    outb(0x3d5, cursorLocation >> 8); // Send the high cursor byte.
-    outb(0x3d4, 15);                  // Tell the VGA board we are setting the low cursor byte.
-    outb(0x3d5, cursorLocation);      // Send the low cursor byte.
+    /* tells the vga board we are setting the high cursor byte */
+    outb(0x3d4, 14);
+
+    /* sends the high cursor byte */
+    outb(0x3d5, cursor_location >> 8);
+
+    /* tells the vga board we are setting the low cursor byte */
+    outb(0x3d4, 15);
+
+    /* sends the low cursor byte */
+    outb(0x3d5, cursor_location);
 }
 
 void clear_screen() {
