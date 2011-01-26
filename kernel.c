@@ -5,6 +5,7 @@ void move_cursor(u16int cursor_x, u16int cursor_y);
 void clear_screen();
 
 void kmain(void *mbd, u32int magic) {
+    /* in case the magic is not valid */
     if (magic != 0x2badb002) {
         /* Something went not according to specs. Print an error */
         /* message and halt, but do *not* rely on the multiboot */
