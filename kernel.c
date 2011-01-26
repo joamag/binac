@@ -1,6 +1,8 @@
-void write_string(int colour, const char *string);
+#include "common.h"
 
-void kmain(void* mbd, unsigned int magic) {
+void write_string(s32int colour, const s8int *string);
+
+void kmain(void *mbd, u32int magic) {
     if (magic != 0x2badb002) {
         /* Something went not according to specs. Print an error */
         /* message and halt, but do *not* rely on the multiboot */
@@ -10,7 +12,7 @@ void kmain(void* mbd, unsigned int magic) {
     /* You could either use multiboot.h */
     /* (http://www.gnu.org/software/grub/manual/multiboot/multiboot.html#multiboot_002eh) */
     /* or do your offsets yourself. The following is merely an example. */
-    char *boot_loader_name = (char*) ((long*) mbd)[16];
+    s8int *boot_loader_name = (char *) ((long *) mbd)[16];
 
     /* writes the hello world string */
     write_string(0x07, "hello world");
@@ -32,9 +34,9 @@ void kmain(void* mbd, unsigned int magic) {
     outportb(0x20, 0x20);
  }
 
-void write_string(int colour, const char *string) {
+void write_string(s32int colour, const s8int *string) {
     /* starts the video buffer value */
-    volatile char *video = (volatile char *) 0xB8000;
+    volatile s8int *video = (volatiles8int *) 0xB8000;
 
     /* iterates while the end of string is not found */
     while(*string != 0) {
@@ -53,4 +55,35 @@ void write_string(int colour, const char *string) {
         /* increments the video buffer */
         video++;
     }
+}
+
+static void move_cursor(u16int cursor_x, u16int cursor_y) {
+    /* calculates the cursor location */
+    u16int cursorLocation = cursor_y * 80 + cursor_x;
+
+    outb(0x3d4, 14);                  // Tell the VGA board we are setting the high cursor byte.
+    outb(0x3d5, cursorLocation >> 8); // Send the high cursor byte.
+    outb(0x3d4, 15);                  // Tell the VGA board we are setting the low cursor byte.
+    outb(0x3d5, cursorLocation);      // Send the low cursor byte.
+}
+
+void monitor_clear() {
+    /* allocates the index */
+	u32int index;
+
+    /* starts the video buffer value */
+    volatile s8int *video = (volatile s8int *) 0xb8000;
+
+    /* makes an attribute byte for the default colours */
+    u8int attributeByte = (0 << 4) | (15 & 0x0f);
+    u16int blank = 0x20 | (attributeByte << 8);
+
+	/* iterates over all the chacter fields in the video buffer */
+    for(index = 0; index < 80 * 25; index++) {
+        /* sets the blank value */
+        video[index] = blank;
+    }
+
+    /* moves the cursor to the start */
+    move_cursor(0, 0);
 }
