@@ -1,4 +1,4 @@
-name: Main Workflow2
+name: Main Workflow
 on:
   push:
     tags:
