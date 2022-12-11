@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        gcc-version: [6, 7, 8, 9, 10, 11, 12]
+        gcc-version: [7, 8, 9, 10, 11, 12]
     runs-on: ubuntu-latest
     container: gcc:${{ matrix.gcc-version }}
     steps:
