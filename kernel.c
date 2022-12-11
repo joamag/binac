@@ -73,7 +73,7 @@ void move_cursor(u16int cursor_x, u16int cursor_y) {
     /* sends the high cursor byte */
     outb(0x3d5, cursor_location >> 8);
 
-    /* tells the vga board we are setting the low cursor byte */
+    /* tells the VGA board we are setting the low cursor byte */
     outb(0x3d4, 15);
 
     /* sends the low cursor byte */
