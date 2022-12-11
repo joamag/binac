@@ -22,3 +22,4 @@ jobs:
       - name: Test Binac
         run: |
           ./load.sh
+ 
