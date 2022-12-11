@@ -1,8 +1,12 @@
 name: Main Workflow
-on: [push]
+on:
+  push:
+    tags:
+      - "*"
 jobs:
   build-gcc:
     name: Build
+    timeout-minutes: 10
     strategy:
       matrix:
         gcc-version: [5, 6, 7, 8, 9]
