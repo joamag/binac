@@ -1,6 +1,6 @@
 # Binac OS
 
-A simple operative system kernel.
+A simple operative system Kernel for educational purposes.
 
 ## Build Automation
 
