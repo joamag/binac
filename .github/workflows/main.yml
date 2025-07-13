@@ -13,7 +13,10 @@ jobs:
           "9-bullseye",
           "10-bullseye",
           "11-bullseye",
-          "12-bullseye"
+          "12-bullseye",
+          "13-bookworm",
+          "14-bookworm",
+          "15-bookworm"
         ]
     runs-on: ubuntu-latest
     container: gcc:${{ matrix.gcc-version }}
