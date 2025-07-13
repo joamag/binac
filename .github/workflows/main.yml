@@ -10,8 +10,6 @@ jobs:
     strategy:
       matrix:
         gcc-version: [
-          7,
-          8,
           "9-bullseye",
           "10-bullseye",
           "11-bullseye",
